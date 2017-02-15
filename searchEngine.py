@@ -11,14 +11,16 @@ reverseIndex = {}
 #Creating Reverse Index for the Search Engine
 def createIndex():
 	try:
-		for line in reader:
-			if len(line)==2:
-				word,indexList = line[0].strip(),line[1].strip()
-				if reverseIndex.get(word,0)==0:
-					reverseIndex[word]=indexList
+		f = open("index.txt","r")
+		for line in f:
+			line = line.split("\t")
+			word,indexList = line[0].strip(),line[1].strip()
+			if reverseIndex.get(word,0)==0:
+				reverseIndex[word]=indexList
 		print "\nINDEX LOADED SUCCESSFULLY!\n"
 	except:
 		print "\nLOADING INDEX FAILED...TERMINATING PROGRAM!\n"
+		exit()
 
 #Getting input
 def getTokens(keyword):
@@ -49,8 +51,8 @@ def getMovieDetails(v1,v2,v3):
 
 if __name__ == "__main__":
 	createIndex()
-	#keyword = raw_input()
-	keyword = "Dance song artist"
+	inp = raw_input("Enter: ")
+	keyword=inp.strip()
 	final_tokens = getTokens(keyword)
 	cwList = []
 	rDic = {}
